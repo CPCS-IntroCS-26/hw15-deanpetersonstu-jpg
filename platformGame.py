@@ -5,7 +5,7 @@ WIDTH = 535
 HEIGHT = 1000
 
 # Player variables
-player = Rect((200, 900), (40, 40))
+player = Rect((500, 900), (40, 40))
 velocity_y = 0
 gravity = 1.45
 on_ground = False
@@ -34,9 +34,15 @@ score = 0
 
 # Hazards and goal
 lavas = [ 
-Rect((247.5, 400), (20, 500)),
-Rect((180, 800), (20, 100)),
-Rect((180, 750), (100, 20))
+Rect((450, 701), (20, 200)),
+Rect((250, 701), (200, 20)),
+Rect((250, 501), (20, 200)),
+Rect((310, 635), (300, 20)),
+Rect((310, 435), (20, 200)),
+Rect((60, 435), (250, 20)),
+Rect((60, 200), (20, 250)),
+Rect((60, 201), (300, 20)),
+Rect((360, 0), (20, 220)),
 ]
 goal = Rect((0, 0), (535, 100))
 game_won = False
@@ -46,6 +52,7 @@ game_won = False
 
 def draw():
     screen.clear()
+    screen.fill("green")
     screen.draw.filled_rect(player, "blue")
 
     for platform in platforms:
@@ -59,11 +66,12 @@ def draw():
     for lava in lavas:
         screen.draw.filled_rect(lava, "red")
 
-    screen.draw.filled_rect(goal, "cyan")
+    screen.draw.filled_rect(goal, "white")
 
     if game_won:
         screen.clear()
         screen.draw.text("You Win!", center=(267.5, 500), fontsize=60, color="yellow")
+        screen.draw.text(f"Score: {score}", center = (267.5, 600), fontsize = 30, color = "white")
 
 def update():
     global velocity_y, on_ground
@@ -106,7 +114,7 @@ def update():
             score += 1
     for lava in lavas[:]:
         if player.colliderect(lava):
-            player.x = 200
+            player.x = 500
             player.y = 900
             velocity_y = 0
 
